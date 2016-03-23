@@ -28,6 +28,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th>Name</th>
                     <th>Code</th>
                     <th>Description</th>
                     <th>Budget</th>
@@ -44,6 +45,7 @@
                     <c:forEach var="contract" items="${projectDetail.contractList}">
                         <tr>
                             <td><a href="/aconex/contract/edit/${contract.id}">${contract.name}</a></td>
+                            <td>${contract.code}</td>
                             <td>${contract.description}</td>
                             <td>${contract.budget}</td>
                             <td>$${contract.committedCost}</td>
