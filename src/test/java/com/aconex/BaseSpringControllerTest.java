@@ -2,7 +2,6 @@ package com.aconex;
 
 
 import junit.framework.TestCase;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.Validator;
 import org.springframework.validation.MapBindingResult;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -14,7 +13,7 @@ import static org.easymock.EasyMock.createMock;
 import java.util.HashMap;
 
 /**
- * Created by madhuri on 3/21/16.
+ * Created by madhuri on 3/2/16.
  */
 public class BaseSpringControllerTest extends TestCase {
 
@@ -24,7 +23,8 @@ public class BaseSpringControllerTest extends TestCase {
     protected Validator mockValidator = createMock(Validator.class);
     protected MapBindingResult result = new MapBindingResult(new HashMap(), "objectName");
 
-    public BaseSpringControllerTest(){
+    public void test() {
+        assertTrue(true);
     }
 
     public MockHttpServletRequest getRequest() {
