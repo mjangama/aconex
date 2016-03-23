@@ -14,4 +14,4 @@
   * Execute the unit tests
   * Deploy the aconex.war to tomcat
   * Restart tomcat server
-* Once done, the website will be available at http://localhost/aconex
+* Once done, the website will be available at http://localhost:8080/aconex
