@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aconex.dao.project.ProjectDao">
+    <!--    result maps     -->
+    <resultMap id="projectMap" type="Project" >
+        <id column="id" property="id"  />
+        <result column="NAME" property="name" />
+    </resultMap>
+
+    <resultMap id="projectDetailMap" type="Project" >
+        <id column="id" property="id"  />
+        <result column="NAME" property="name" />
+        <result column="DESCRIPTION" property="description" />
+        <result column="START_DATE" property="startDate" />
+        <result column="END_DATE" property="endDate" />
+        <result column="FIRST_NAME" property="user.firstName" />
+        <result column="LAST_NAME" property="user.lastName" />
+    </resultMap>
+
+    <select id="getProjectList" resultMap="projectMap">
+        SELECT
+        ID,
+        NAME
+        FROM
+        project
+    </select>
+
+    <select id="getProjectById" resultMap="projectDetailMap" parameterType="int">
+        SELECT
+        P.ID,
+        P.NAME,
+        DESCRIPTION,
+        START_DATE,
+        END_DATE,
+        U.FIRST_NAME AS FIRST_NAME,
+        U.LAST_NAME AS LAST_NAME
+        FROM
+        project P
+        LEFT OUTER JOIN user_info U ON U.ID = P.OWNER_ID
+        WHERE p.id = #{projectId}
+    </select>
+
+</mapper>

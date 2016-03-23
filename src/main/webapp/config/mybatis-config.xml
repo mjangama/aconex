@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.aconex.model.contract.Contract" alias="Contract"/>
+        <typeAlias type="com.aconex.model.project.Project" alias="Project"/>
+        <typeAlias type="com.aconex.model.vendor.Vendor" alias="Vendor"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="ContractMapper.xml" />
+        <mapper resource="ProjectMapper.xml" />
+        <mapper resource="VendorMapper.xml" />
+    </mappers>
+</configuration>

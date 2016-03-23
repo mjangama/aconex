@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aconex.dao.contract.ContractDao">
+    <!--    result maps     -->
+    <resultMap id="contractBaseMap" type="Contract">
+        <id column="id" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="DESCRIPTION" property="description"/>
+        <result column="CODE" property="code"/>
+        <result column="BUDGET" property="budget"/>
+        <result column="COMMITTED_COST" property="committedCost"/>
+        <result column="FORECAST" property="forecast"/>
+        <result column="PAYMENT" property="payment"/>
+        <result column="COMPLETION_PERCENTAGE" property="completionPercentage"/>
+        <result column="VENDOR_NAME" property="vendor.name"/>
+        <result column="PROJECT_ID" property="project.id"/>
+    </resultMap>
+
+    <resultMap id="contractMap" type="Contract" extends="contractBaseMap">
+        <result column="VENDOR_ID" property="vendor.id"/>
+        <result column="PROJECT_NAME" property="project.name"/>
+    </resultMap>
+
+
+    <select id="getContractsByProjectId" resultMap="contractBaseMap" parameterType="int">
+        SELECT
+        C.ID,
+        C.NAME,
+        C.DESCRIPTION,
+        CODE,
+        BUDGET,
+        COMMITTED_COST,
+        FORECAST,
+        PAYMENT,
+        COMPLETION_PERCENTAGE,
+        V.NAME AS VENDOR_NAME,
+        PROJECT_ID
+        FROM
+        contract C
+        LEFT OUTER JOIN vendor V ON V.ID = C.VENDOR_ID
+        WHERE PROJECT_ID = #{value}
+    </select>
+
+    <select id="getContractById" resultMap="contractMap" parameterType="int">
+        SELECT
+        C.ID,
+        C.NAME,
+        C.DESCRIPTION,
+        CODE,
+        BUDGET,
+        COMMITTED_COST,
+        FORECAST,
+        PAYMENT,
+        COMPLETION_PERCENTAGE,
+        VENDOR_ID,
+        V.NAME AS VENDOR_NAME,
+        PROJECT_ID,
+        P.NAME AS PROJECT_NAME
+        FROM
+        contract C
+        LEFT OUTER JOIN vendor V ON V.ID = C.VENDOR_ID
+        LEFT OUTER JOIN project P ON P.ID = C.PROJECT_ID
+        WHERE C.ID = #{contractId}
+    </select>
+
+    <insert id="insertContract" parameterType="com.aconex.model.contract.Contract">
+        INSERT INTO CONTRACT
+        (
+        name,
+        description,
+        code,
+        budget,
+        committed_cost,
+        forecast,
+        payment,
+        completion_percentage,
+        project_id,
+        vendor_id
+        )
+        VALUES
+        (
+        #{name},
+        #{description},
+        #{code},
+        #{budget},
+        #{committedCost},
+        #{forecast},
+        #{payment},
+        #{completionPercentage},
+        #{project.id},
+        #{vendor.id}
+        )
+    </insert>
+
+    <update id="updateContract" parameterType="com.aconex.model.contract.Contract">
+        UPDATE CONTRACT SET
+          NAME = #{name},
+          CODE = #{code},
+          DESCRIPTION = #{description},
+          BUDGET = #{budget},
+          COMMITTED_COST = #{committedCost},
+          FORECAST = #{forecast},
+          PAYMENT = #{payment},
+          COMPLETION_PERCENTAGE = #{completionPercentage},
+          VENDOR_ID = #{vendor.id}
+        WHERE  id = #{id}
+    </update>
+
+
+</mapper>

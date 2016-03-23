@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+       <context:component-scan base-package="com.aconex" />
+
+       <!-- ========================= MYBATIS DEFINITION ========================= -->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+              <property name="dataSource" ref="dataSource" />
+              <property name="configLocation" value="/config/mybatis-config.xml"/>
+       </bean>
+
+       <!-- ========================= DATASOURCE DEFINITION ========================= -->
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" scope="singleton">
+              <property name="driverClassName" value="org.postgresql.Driver" />
+              <property name="url" value="jdbc:postgresql://ec2-54-83-204-228.compute-1.amazonaws.com:5432/ddoed6bavcbh5o?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory" />
+              <property name="username" value="ijutjytziuuajq" />
+              <property name="password" value="Ke-SdO2SrdmzPixkD2TwUbHQvs" />
+       </bean>
+
+       <!-- =================== Service beans configuration ================== -->
+       <bean id="contractService" class="com.aconex.services.contract.ContractServiceImpl">
+              <property name="contractDao" ref="contractDao"/>
+       </bean>
+       <bean id="projectService" class="com.aconex.services.project.ProjectServiceImpl">
+              <property name="projectDao" ref="projectDao"/>
+       </bean>
+       <bean id="vendorService" class="com.aconex.services.vendor.VendorServiceImpl">
+              <property name="vendorDao" ref="vendorDao"/>
+       </bean>
+
+
+       <!-- =============== MyBATIS beans configuration ================== -->
+       <bean id="contractDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+              <property name="mapperInterface" value="com.aconex.dao.contract.ContractDao" />
+       </bean>
+       <bean id="projectDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+              <property name="mapperInterface" value="com.aconex.dao.project.ProjectDao" />
+       </bean>
+       <bean id="vendorDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+              <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+              <property name="mapperInterface" value="com.aconex.dao.vendor.VendorDao" />
+       </bean>
+
+       <!-- =============== Tiles configuration ================== -->
+       <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+              <property name="viewClass">
+                     <value>
+                            org.springframework.web.servlet.view.tiles3.TilesView
+                     </value>
+              </property>
+       </bean>
+       <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+              <property name="definitions">
+                     <list>
+                            <value>/WEB-INF/tiles.xml</value>
+                     </list>
+              </property>
+       </bean>
+
+       <!-- =============== Validation ================== -->
+       <mvc:annotation-driven />
+       <bean id="validator"
+             class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+
+</beans>
