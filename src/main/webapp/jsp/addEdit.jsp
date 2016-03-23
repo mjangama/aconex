@@ -16,11 +16,11 @@
                 ${contractForm.mode != null && contractForm.mode.equalsIgnoreCase("edit") ? "Edit contract" : "Add Contract"}
         </h2>
 
-        <form:form name="contractForm" cssClass="form-horizontal" action="/contract/save" method="post"
+        <form:form name="contractForm" cssClass="form-horizontal" action="/aconex/contract/save" method="post"
                    commandName="contractForm">
             <p><form:errors path="*" cssClass="error"/></p>
 
-            <form id="contractForm" name="contractForm" class="form-horizontal" role="form" action="/contract/save" method="post">
+            <form id="contractForm" name="contractForm" class="form-horizontal" role="form" action="/aconex/contract/save" method="post">
 
             <input type="hidden" name="projectId" value="${contractForm.projectId}"/>
             <input type="hidden" name="mode" value="${contractForm.mode}"/>
@@ -33,7 +33,7 @@
                     <button type="submit" class="btn btn-primary">
                             ${contractForm.mode != null && contractForm.mode.equalsIgnoreCase("edit") ? "Save" : "Add"}
                     </button>
-                    <a href="/view/${contractForm.projectId}" class="btn btn-default" role="button">Cancel</a>
+                    <a href="/aconex/view/${contractForm.projectId}" class="btn btn-default" role="button">Cancel</a>
                 </div>
             </div>
 
@@ -133,7 +133,7 @@
                     <button type="submit" class="btn btn-primary">
                             ${contractForm.mode != null && contractForm.mode.equalsIgnoreCase("edit") ? "Save" : "Add"}
                     </button>
-                    <a href="/view/${contractForm.projectId}" class="btn btn-default" role="button">Cancel</a>
+                    <a href="/aconex/view/${contractForm.projectId}" class="btn btn-default" role="button">Cancel</a>
                 </div>
             </div>
 

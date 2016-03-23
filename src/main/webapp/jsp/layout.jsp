@@ -16,15 +16,14 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
 
   <title><tiles:insertAttribute name="title" /></title>
 
   <!-- Bootstrap core CSS -->
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/aconex/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="/css/aconex.css" rel="stylesheet">
+  <link href="/aconex/css/aconex.css" rel="stylesheet">
 
 </head>
 
@@ -51,7 +50,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Please select a project <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <c:forEach var="project" items="${applicationScope.projectList}" >
-              <li><a href="/view/${project.id}">${project.name}</a></li>
+              <li><a href="/aconex/view/${project.id}">${project.name}</a></li>
             </c:forEach>
           </ul>
         </li>
@@ -77,10 +76,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-1.7.1.min.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
-<script src="/js/aconex-validation.js"></script>
+<script src="/aconex/js/bootstrap.min.js"></script>
+<script src="/aconex/js/jquery-1.7.1.min.js"></script>
+<script src="/aconex/js/jquery.validate.min.js"></script>
+<script src="/aconex/js/aconex-validation.js"></script>
 
 </body>
 </html>

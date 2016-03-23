@@ -22,7 +22,7 @@
 
         <h2 class="sub-header">Contract List</h2>
 
-        <p><a href="/contract/add?pid=${projectDetail.id}" class="btn btn-primary" role="button">Add Contract</a></p>
+        <p><a href="/aconex/contract/add?pid=${projectDetail.id}" class="btn btn-primary" role="button">Add Contract</a></p>
 
         <div class="table-responsive">
             <table class="table table-striped">
@@ -43,7 +43,7 @@
                 <c:if test="${projectDetail.contractList != null}">
                     <c:forEach var="contract" items="${projectDetail.contractList}">
                         <tr>
-                            <td><a href="/contract/edit/${contract.id}">${contract.name}</a></td>
+                            <td><a href="/aconex/contract/edit/${contract.id}">${contract.name}</a></td>
                             <td>${contract.description}</td>
                             <td>${contract.budget}</td>
                             <td>$${contract.committedCost}</td>
