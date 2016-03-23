@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+
+<project name="AconexPairing" default="package" basedir=".">
+
+  <property file="build.properties"/>
+
+  <!-- ====================================================================== -->
+  <!-- Import maven-build.xml into the current project                        -->
+  <!-- ====================================================================== -->
+
+  <import file="maven-build.xml"/>
+
+    <path id="tomcat-control-classpath">
+        <fileset dir="${tomcat.home}/bin">
+            <include name="bootstrap.jar"/>
+            <include name="tomcat-juli.jar"/>
+        </fileset>
+    </path>
+
+
+    <target name="start-tomcat">
+        <java classname="org.apache.catalina.startup.Bootstrap" fork="true" classpathref="tomcat-control-classpath">
+            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+        </java>
+    </target>
+
+    <target name="stop-tomcat">
+        <java classname="org.apache.catalina.startup.Bootstrap" fork="true" classpathref="tomcat-control-classpath">
+            <jvmarg value="-Dcatalina.home=${tomcat.home}"/>
+            <arg line="stop"/>
+        </java>
+    </target>
+
+    <target name="deploy" depends="war">
+        <sequential>
+            <antcall target="stop-tomcat"/>
+            <echo>Deploy to server</echo>
+            <copy todir="${tomcat.deploy.location}">
+                <fileset file="${test-war-loc}"/>
+            </copy>
+            <antcall target="start-tomcat"/>
+        </sequential>
+    </target>
+
+</project>
