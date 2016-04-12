@@ -5,7 +5,7 @@
 * ant 1.9
 
 #Steps
-* Clone the repository. It includes tomcat as part of it
+* Clone the repository. It includes tomcat as part of it.
 * Go to the aconex directory
 * Run the command "ant deploy"
 * This will do the following
